@@ -8,8 +8,6 @@ Player::Player(Screen* _maze, int _startX, int _startY)
     maze->Display();
     currentX = _startX;
     currentY = _startY;
-    cout<<"Starting X: " + currentX + '\n';
-    cout<<"Starting Y: " + currentY + '\n';
     maze->Draw('X', _startX, _startY);
     moves = new Stack<int, int>();
     moves->push(currentX, currentY);
@@ -72,6 +70,16 @@ bool Player::PlayGame()
                 cout<<"Wall hit!  Can't move!\n";
                 break;
             default:
+                if (xPos >= maze->GetWidth() || xPos <= 0)
+                {
+                    cout<<"Walked off maze!  Can't move!\n";
+                    break;
+                }
+                if (yPos >= maze->GetHeight() || yPos <= 0)
+                {
+                    cout<<"Walked off maze!  Can't move!\n";
+                    break;
+                }
                 maze->Draw(' ', currentX, currentY);
                 currentX = xPos;
                 currentY = yPos;
@@ -91,7 +99,7 @@ bool Player::PlayGame()
 
 void Player::GameOver()
 {
-    cout<<"GAME OVER";
+    cout<<"GAME OVER\n";
     maze->Draw(' ', currentX, currentY);
     maze->Display();
     Node<int, int>* temp = moves->GetTop();

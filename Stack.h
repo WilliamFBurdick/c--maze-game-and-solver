@@ -50,6 +50,22 @@ class Stack {
         };
         bool isEmpty() {return (size <= 0 || top == nullptr);};
         int GetSize() { return size; };
+        bool Contains(T1 value1, T2 value2)
+        {
+            Node<T1, T2>* temp = top;
+            while (temp != nullptr)
+            {
+                if (temp->getValue1() == value1 && temp->getValue2() == value2)
+                {
+                    return true;
+                }
+                else
+                {
+                    temp = temp->getNext();
+                }
+            }
+            return false;
+        }
 };
 
 #endif

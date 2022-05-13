@@ -42,8 +42,8 @@ int main()
         }
     }
     maze.Display();
-
-    while (selection != "quit")
+    bool done = false;
+    while (selection != "quit" && !done)
     {
         cout<<"Would you like to play this maze or solve it? ('play'/'solve'/'quit'): ";
         cin>>selection;
@@ -51,6 +51,7 @@ int main()
         {
             Player player(&maze, startX, startY);
             player.PlayGame();
+            done = true;
         }
         else if (selection == "solve")
         {
@@ -63,6 +64,7 @@ int main()
             {
                 cout<<"Could not solve!\n";
             }
+            done = true;
         }
     }
     return 0;

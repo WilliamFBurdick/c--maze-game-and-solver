@@ -1,4 +1,5 @@
 #include "Solver.h"
+#include <iostream>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ bool Solver::BeginSolve()
 
 bool Solver::RecSolve(int x, int y)
 {
+    maze->Display();
     moves->push(x, y);
     bool found;
 
@@ -25,20 +27,20 @@ bool Solver::RecSolve(int x, int y)
         maze->Draw('X', x, y);
         return true;
     }
-
-    if (maze->GetPixel(x, y - 1) != '#' && !found)
+    
+    if (maze->GetPixel(x, y - 1) != '#' && !found && (y-1) < maze->GetHeight() && (y-1) >= 0 && !moves->Contains(x, y-1))
     {
         found = RecSolve(x, y - 1); 
     }
-    if (maze->GetPixel(x + 1, y) != '#' && !found)
+    if (maze->GetPixel(x + 1, y) != '#' && !found && (x+1) < maze->GetWidth() && (x+1) >= 0 && !moves->Contains(x+1, y))
     {
         found = RecSolve(x + 1, y);
     }
-    if (maze->GetPixel(x, y + 1) != '#' && !found)
+    if (maze->GetPixel(x, y + 1) != '#' && !found && (y+1) < maze->GetHeight() && (y+1) >= 0 && !moves->Contains(x, y+1))
     {
         found = RecSolve(x, y + 1);
     }
-    if (maze->GetPixel(x - 1, y) != '#' && !found)
+    if (maze->GetPixel(x - 1, y) != '#' && !found && (x-1) < maze->GetHeight() && (x-1) >= 0 && !moves->Contains(x-1, y))
     {
         found = RecSolve(x - 1, y);
     }

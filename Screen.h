@@ -11,6 +11,8 @@ class Screen {
         void Draw(char _char, int x, int y);
         void Display();
         char GetPixel(int x, int y);
+        int GetWidth() {return m_width;};
+        int GetHeight() {return m_height;};
 };
 
 #endif
